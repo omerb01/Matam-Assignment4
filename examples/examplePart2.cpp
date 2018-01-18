@@ -1,6 +1,6 @@
-#include "testMacros.h"
-#include "MtmSet.h"
-#include "exceptions.h"
+#include "../testMacros.h"
+#include "../MtmSet.h"
+#include "../exceptions.h"
 
 using namespace mtm;
 

@@ -14,6 +14,13 @@ namespace mtm{
     * A Family group of hunter-gatherers.
     */
     class Group{
+        std::string name;
+        std::string clan;
+        int children;
+        int adults;
+        int tools;
+        int food;
+        int morale;
 
     public:
         /**
