@@ -4,6 +4,7 @@
 
 #include "Group.h"
 #include "exceptions.h"
+#include <cmath>
 
 using namespace mtm;
 
@@ -69,6 +70,42 @@ void Group::changeClan(const std::string &new_clan) {
         temp = morale - morale * 0.1;
     }
 
-    if(temp > 100) temp = 100.0;
+    if (temp > 100) temp = 100.0;
     morale = (int) temp;
 }
+
+/*
+int Group::calcPower(Group& rhs){
+    return int(floor(((10 * rhs.adults + 3 * rhs.children) *
+                       (10 * rhs.tools + rhs.food) * (rhs.morale)) / 100));
+}
+*/
+
+
+bool Group::operator<(const Group& rhs) const{
+    int rhs_power, this_power;
+    rhs_power = int(floor(((10 * rhs.adults + 3 * rhs.children) *
+                       (10 * rhs.tools + rhs.food) * (rhs.morale)) / 100));
+    this_power = int(floor(((10 * adults + 3 * children) *
+                        (10 * tools + food) * (morale)) / 100));
+    if (rhs_power > this_power) {
+        return true;
+    } else if (this_power > rhs_power) {
+        return false;
+    } else {
+        if(name < rhs.name) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+}
+/*bool Group::operator==(const Group& rhs) const{
+
+}*/
+/*
+bool Group::operator>(const Group& rhs) const{
+    if(!(this < rhs)){
+
+    }
+}*/
