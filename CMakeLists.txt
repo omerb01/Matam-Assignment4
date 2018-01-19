@@ -6,4 +6,4 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Werror -pedantic")
 
 add_executable(Assignment4 Group.h exceptions.h Group.cpp
-        Group_test.cpp testMacros.h)
+        Group_test.cpp testMacros.h #[[Clan.cpp Clan_test.cpp]])

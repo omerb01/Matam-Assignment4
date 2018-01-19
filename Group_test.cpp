@@ -5,9 +5,8 @@
 #include "testMacros.h"
 #include "Group.h"
 #include "exceptions.h"
-#include <iostream>
 
-using namespace mtm{
+using namespace mtm;
 
 bool testConstructor1() {
     ASSERT_EXCEPTION(Group("", "clan", 5, 5, 3, 1, 80), GroupInvalidArgs);

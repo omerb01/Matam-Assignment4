@@ -16,7 +16,7 @@ namespace mtm{
      * lost all of its people, will be removed from the clan.
      */
     class Clan{
-    
+        std::string name;
     public:
         /**
          * Constructor

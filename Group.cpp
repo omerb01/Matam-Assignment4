@@ -148,7 +148,7 @@ void Group::uniteClan(Group &source, Group &destination) {
     int total_food = source.food + destination.food;
     int total_tools = source.tools + destination.tools;
     int morale = int(
-            floor((((source.morale * (source.children + source.adults)) *
+            floor((((source.morale * (source.children + source.adults)) +
                     (destination.morale *
                      (destination.children + destination.adults))) /
                    ((double) total_adults + (double) total_children))));
@@ -287,7 +287,7 @@ std::ostream &operator<<(std::ostream &os, const Group &group) {
        << group.clan << "\n" << "Group's children: " << group.children
        << "\n" << "Group's adults: " << group.adults << "\n"
        << "Group's tools: " << group.tools << "\n"<< "Group's food: "
-       << group.food <<"\n"<< "Group's morale: " << group.morale;
+       << group.food <<"\n"<< "Group's morale: " << group.morale <<"\n";
     return os;
 }
 }
