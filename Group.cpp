@@ -7,7 +7,7 @@
 #include <cmath>
 
 
-using namespace mtm;
+namespace mtm{
 
 Group::Group(const std::string &name, const std::string &clan, int children,
              int adults, int tools, int food, int morale) {
@@ -282,7 +282,6 @@ bool Group::trade(Group &other) {
     }
     return true;
 }
-namespace mtm{
 std::ostream &operator<<(std::ostream &os, const Group &group) {
     os << "Group's name: " << group.name << "\n" << "Group's clan: "
        << group.clan << "\n" << "Group's children: " << group.children
