@@ -21,6 +21,12 @@ namespace mtm{
         int tools;
         int food;
         int morale;
+        int calcPower(const Group& rhs)const;
+        void uniteClan(Group& source, Group& destination);
+        void postFightUpdate(Group& lost, Group& won);
+        void makeTrade(Group& group1, Group& group2, int average_trade);
+        int max(int a, int b);
+        int min(int a, int b);
 
     public:
         /**
