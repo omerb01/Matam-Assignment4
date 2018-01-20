@@ -18,8 +18,8 @@ namespace mtm{
      */
     class Clan{
         std::string name;
-        MtmSet<Group> groups;
-        MtmSet<Group> friend_groups;
+        MtmSet<GroupPointer> groups;
+        MtmSet<std::string> friend_groups;
     public:
         /**
          * Constructor
