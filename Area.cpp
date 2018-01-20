@@ -42,7 +42,10 @@ void Area::groupArrive(const string &group_name, const string &clan,
 
 void Area::groupLeave(const std::string &group_name) {
     for(auto i = groups.begin(); i != groups.end(); i++) {
-        if((*i)->getName() == group_name) groups.erase(i);
+        if((*i)->getName() == group_name) {
+            groups.erase(i);
+            return;
+        }
     }
     throw AreaGroupNotFound();
 }
@@ -52,5 +55,5 @@ MtmSet<std::string> Area::getGroupsNames() const {
     for(auto i = groups.begin(); i != groups.end(); i++) {
         groups_names.insert((*i)->getName());
     }
-    return groups_names;
+    return MtmSet<string>(groups_names);
 }
