@@ -85,7 +85,6 @@ bool testGroupLeave() {
 
 bool testGetGroupsNames() {
     Area area("area_name");
-    MtmSet<string> set;
     std::map<string, Clan> clan_map;
     clan_map.insert(std::pair<string, Clan>("clan1", Clan("clan1")));
     clan_map.insert(std::pair<string, Clan>("clan2", Clan("clan2")));
@@ -93,19 +92,19 @@ bool testGetGroupsNames() {
     clan_map.at("clan1").addGroup(Group("group1", 1, 1));
     clan_map.at("clan2").addGroup(Group("group2", 1, 1));
 
-    set = area.getGroupsNames();
-    ASSERT_TRUE(set.empty());
+    MtmSet<string> set1 = area.getGroupsNames();
+    ASSERT_TRUE(set1.empty());
 
     area.groupArrive("group1", "clan1", clan_map);
-    set = area.getGroupsNames();
-    ASSERT_TRUE(set.size() == 1);
-    ASSERT_TRUE(*set.begin() == "group1");
+    MtmSet<string> set2 = area.getGroupsNames();
+    ASSERT_TRUE(set2.size() == 1);
+    ASSERT_TRUE(*set2.begin() == "group1");
 
     area.groupArrive("group2", "clan2", clan_map);
-    set = area.getGroupsNames();
-    ASSERT_TRUE(set.size() == 2);
-    ASSERT_TRUE(set.contains("group1"));
-    ASSERT_TRUE(set.contains("group2"));
+    MtmSet<string> set3 = area.getGroupsNames();
+    ASSERT_TRUE(set3.size() == 2);
+    ASSERT_TRUE(set3.contains("group1"));
+    ASSERT_TRUE(set3.contains("group2"));
 
     return true;
 }

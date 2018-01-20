@@ -33,16 +33,16 @@ void Area::groupArrive(const string &group_name, const string &clan,
         throw AreaGroupNotInClan();
     }
 
-    for(auto i = groups.begin(); i != groups.end(); i++) {
-        if(*i == group_ptr) throw AreaGroupAlreadyIn();
+    for (auto i = groups.begin(); i != groups.end(); i++) {
+        if (*i == group_ptr) throw AreaGroupAlreadyIn();
     }
 
     groups.push_back(group_ptr);
 }
 
 void Area::groupLeave(const std::string &group_name) {
-    for(auto i = groups.begin(); i != groups.end(); i++) {
-        if((*i)->getName() == group_name) {
+    for (auto i = groups.begin(); i != groups.end(); i++) {
+        if ((*i)->getName() == group_name) {
             groups.erase(i);
             return;
         }
@@ -52,7 +52,7 @@ void Area::groupLeave(const std::string &group_name) {
 
 MtmSet<std::string> Area::getGroupsNames() const {
     MtmSet<string> groups_names;
-    for(auto i = groups.begin(); i != groups.end(); i++) {
+    for (auto i = groups.begin(); i != groups.end(); i++) {
         groups_names.insert((*i)->getName());
     }
     return MtmSet<string>(groups_names);
