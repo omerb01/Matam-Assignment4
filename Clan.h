@@ -3,6 +3,7 @@
 
 #include <string>
 #include "Group.h"
+#include "MtmSet.h"
 #include <ostream>
 #include <memory>
 
@@ -17,6 +18,8 @@ namespace mtm{
      */
     class Clan{
         std::string name;
+        MtmSet<Group> groups;
+        MtmSet<Group> friend_groups;
     public:
         /**
          * Constructor
