@@ -74,6 +74,9 @@ bool testCopyConstructor() {
         ASSERT_TRUE(i != j);
     }
 
+    set.erase(2);
+    ASSERT_TRUE(set_copy.contains(2));
+
     return true;
 }
 
