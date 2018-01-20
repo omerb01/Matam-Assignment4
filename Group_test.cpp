@@ -265,6 +265,7 @@ bool testPrint(){
 }
 
 int main() {
+    //TODO: make test for evrey case.
     RUN_TEST(testConstructor1);
     RUN_TEST(testConstructor2);
     RUN_TEST(testGetName);
