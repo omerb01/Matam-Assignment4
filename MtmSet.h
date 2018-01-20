@@ -213,7 +213,7 @@ namespace mtm {
              */
             const Type *operator->() const {
                 if (node == nullptr) throw NodeIsEndException();
-                return this->node->element;
+                return &(this->node->element);
             }
 
             /**
@@ -236,9 +236,9 @@ namespace mtm {
              * an element in the set (end())
              */
             const_iterator operator++(int) {
-                const_iterator it(*this);
+                const_iterator prev(*this);
                 ++(*this);
-                return it;
+                return prev;
             }
 
             /**
