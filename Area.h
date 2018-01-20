@@ -20,9 +20,10 @@ namespace mtm{
      * Groups that become empty, should be removed from the area.
      */
     class Area{
-        
-    protected:
+        string name;
+        MtmSet<string> reachable_areas;
 
+    protected:
         std::vector<GroupPointer> groups;
 
     public:
