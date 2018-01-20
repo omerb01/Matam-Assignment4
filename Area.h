@@ -78,7 +78,7 @@ namespace mtm{
          * @throws AreaGroupAlreadyIn If group with same name already in the
          *  area.
          *
-         * Assert that the map does contain the clan that the group belongs to.
+         * the map does contain the clan that the group belongs to.
          */
         virtual void groupArrive(const string& group_name, const string& clan,
                                  map<string, Clan>& clan_map);
