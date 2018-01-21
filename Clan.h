@@ -21,6 +21,7 @@ namespace mtm{
         MtmSet<GroupPointer> groups;
         MtmSet<std::string> friend_groups;
         void ChangeClan(Clan& clan,const std::string& new_name);
+        static GroupPointer getMax(MtmSet<mtm::GroupPointer> filtered_set);
     public:
         /**
          * Constructor
