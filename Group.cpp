@@ -173,7 +173,7 @@ bool Group::unite(Group &other, int max_amount) {
     if (this->name != other.name && this->clan == other.clan &&
         total_people <= max_amount &&
         other.morale >= 70 && morale >= 70) {
-        if (*this > other) {
+        if (*this >= other) {
             uniteClan(other,(*this).name);
         } else {
             uniteClan(other, other.name);
