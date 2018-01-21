@@ -7,6 +7,15 @@
 
 using namespace mtm;
 
+bool testConstructor() {
+
+    ASSERT_EXCEPTION(Area area(""), AreaInvalidArguments);
+    ASSERT_NO_EXCEPTION(Area area("a"));
+    ASSERT_NO_EXCEPTION(Area area("a"));
+
+    return true;
+}
+
 bool testAddReachableArea() {
     Area area("area_name");
 
@@ -110,6 +119,7 @@ bool testGetGroupsNames() {
 }
 
 int main() {
+    RUN_TEST(testConstructor);
     RUN_TEST(testAddReachableArea);
     RUN_TEST(testIsReachable);
     RUN_TEST(testGroupArrive);

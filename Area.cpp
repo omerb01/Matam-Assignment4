@@ -3,11 +3,13 @@
 //
 
 #include "Area.h"
-#include "exceptions.h"
 
 using namespace mtm;
 
-Area::Area(const std::string &name) : name(name) {}
+Area::Area(const std::string &name) {
+    if(name.empty()) throw AreaInvalidArguments();
+    this->name = name;
+}
 
 Area::~Area() = default;
 
