@@ -14,7 +14,7 @@ namespace mtm {
         }
         this->name = name;
         groups = MtmSet<GroupPointer>();
-        friend_groups = MtmSet<std::string>();
+        friend_clans = MtmSet<std::string>();
     }
 
     Clan::Clan(const Clan &other) = default;
@@ -84,7 +84,7 @@ namespace mtm {
                 throw ClanCantUnite();
             }
         }
-        friend_groups.unite(other.friend_groups);
+        friend_clans.unite(other.friend_clans);
         if (new_name == name) {
             ChangeClan(other, new_name);
         } else if (new_name == other.name) {
@@ -118,14 +118,14 @@ namespace mtm {
         if(this->isFriend(other)){
             return;
         }else{
-            this->friend_groups.insert(other.name);
-            other.friend_groups.insert(this->name);
+            this->friend_clans.insert(other.name);
+            other.friend_clans.insert(this->name);
         }
     }
 
     bool Clan::isFriend(const Clan& other) const{
         if(other.name == name) return true;
-        return friend_groups.contains(other.name);
+        return friend_clans.contains(other.name);
     }
 
     std::ostream &operator<<(std::ostream &os, const Clan &clan) {

@@ -22,7 +22,7 @@ namespace mtm{
         int food;
         int morale;
         int calcPower(const Group& rhs)const;
-        void uniteClan(Group& source, Group& destination);
+        void uniteClan(Group& destination, const std::string& new_name);
         void postFightUpdate(Group& lost, Group& won);
         void makeTrade(Group& group1, Group& group2, int average_trade);
         int max(int a, int b);

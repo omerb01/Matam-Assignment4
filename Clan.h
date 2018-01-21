@@ -19,7 +19,7 @@ namespace mtm{
     class Clan{
         std::string name;
         MtmSet<GroupPointer> groups;
-        MtmSet<std::string> friend_groups;
+        MtmSet<std::string> friend_clans;
         void ChangeClan(Clan& clan,const std::string& new_name);
         static GroupPointer getMax(MtmSet<mtm::GroupPointer> filtered_set);
     public:

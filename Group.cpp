@@ -142,29 +142,30 @@ bool Group::operator<=(const Group &rhs) const {
     }
 }
 
-void Group::uniteClan(Group &source, Group &destination) {
-    int total_adults = source.adults + destination.adults;
-    int total_children = source.children + destination.children;
-    int total_food = source.food + destination.food;
-    int total_tools = source.tools + destination.tools;
+void Group::uniteClan(Group &destination, const std::string& new_name){
+    int total_adults = adults + destination.adults;
+    int total_children = children + destination.children;
+    int total_food = food + destination.food;
+    int total_tools = tools + destination.tools;
     int morale = int(
-            floor((((source.morale * (source.children + source.adults)) +
+            floor((((this->morale * (children + adults)) +
                     (destination.morale *
                      (destination.children + destination.adults))) /
                    ((double) total_adults + (double) total_children))));
     morale = morale >= 100 ? 100 : morale;
-    destination.adults = total_adults;
-    destination.children = total_children;
-    destination.food = total_food;
-    destination.tools = total_tools;
-    destination.morale = morale;
-    source.tools = 0;
-    source.children = 0;
-    source.food = 0;
-    source.adults = 0;
-    source.clan = "";
-    source.name = "";
-    source.morale = 0;
+    tools = total_tools;
+    children = total_children;
+    food = total_food;
+    adults = total_adults;
+    this->name = new_name;
+    this->morale = morale;
+    destination.adults = 0;
+    destination.children = 0;
+    destination.food = 0;
+    destination.tools = 0;
+    destination.morale = 0;
+    destination.name="";
+    destination.clan="";
 }
 
 bool Group::unite(Group &other, int max_amount) {
@@ -173,9 +174,9 @@ bool Group::unite(Group &other, int max_amount) {
         total_people <= max_amount &&
         other.morale >= 70 && morale >= 70) {
         if (*this > other) {
-            uniteClan(other, *this);
+            uniteClan(other,(*this).name);
         } else {
-            uniteClan(*this, other);
+            uniteClan(other, other.name);
         }
         return true;
     } else {

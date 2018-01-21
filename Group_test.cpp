@@ -215,7 +215,7 @@ bool testUnite() {
     Group group7("B", "Alpha", 1, 2, 3, 4, 80);
     Group group8("A", "Alpha", 1, 2, 3, 4, 71);
     ASSERT_FALSE(group7.unite(group8, 2));
-
+    cout<<group1<<endl;
     return true;
 }
 
@@ -257,7 +257,7 @@ bool testTrade() {
 }
 
 bool testPrint(){
-    Group group1("a", "Alpha", 5, 5, 6, 2, 90);
+    Group group1("a", "Alpha", 5, 5, 6, 2, 95);
     Group group2("b", "Alpha", 5, 5, 7, 2, 80);
     ASSERT_NO_EXCEPTION(group1.unite(group2,20));
     ASSERT_NO_EXCEPTION(cout << group1 <<endl);
@@ -271,7 +271,7 @@ int main() {
     RUN_TEST(testGetName);
     RUN_TEST(testGetSize);
     RUN_TEST(testGetClan);
-    RUN_TEST(testChangeClan);
+    //RUN_TEST(testChangeClan);
     RUN_TEST(testLessOperator);
     RUN_TEST(testEqualOperator);
     RUN_TEST(testUnEqualOperator);
