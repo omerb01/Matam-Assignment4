@@ -20,7 +20,7 @@ namespace mtm{
         std::string name;
         MtmSet<GroupPointer> groups;
         MtmSet<std::string> friend_groups;
-        bool isInSet(const std::string& group_name);
+        void ChangeClan(Clan& clan,const std::string& new_name);
     public:
         /**
          * Constructor
