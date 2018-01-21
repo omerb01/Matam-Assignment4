@@ -102,21 +102,43 @@ namespace mtm {
         return *this;
     }
 
+    GroupPointer Clan::getMax(MtmSet<mtm::GroupPointer> filtered_set){
+        if (filtered_set.empty()) return nullptr;
+        MtmSet<GroupPointer>::iterator it;
+        GroupPointer maximum = *filtered_set.begin();
+        for(it=filtered_set.begin();it!=filtered_set.end();it++){
+            if((*(*it)) > *maximum) {
+                maximum = *it;
+            }
+        }
+        return maximum;
+    }
 
+    void Clan::makeFriend(Clan& other){
+        if(this->isFriend(other)){
+            return;
+        }else{
+            this->friend_groups.insert(other.name);
+            other.friend_groups.insert(this->name);
+        }
+    }
 
-    /*std::ostream &operator<<(std::ostream &os, const Clan &clan) {
+    bool Clan::isFriend(const Clan& other) const{
+        if(other.name == name) return true;
+        return friend_groups.contains(other.name);
+    }
+
+    std::ostream &operator<<(std::ostream &os, const Clan &clan) {
         MtmSet<mtm::GroupPointer> filtered_set = clan.groups;
         MtmSet<GroupPointer>::iterator it2;
         os << "Clan's name: " << clan.name << "\nClan's groups: \n";
         GroupPointer temp2 = nullptr;
-        for (auto it = filtered_set.begin(); it != filtered_set.end(); it++) {
-            Group temp = (*(*it));
-            // build max function. if current element func's max == current, print it and remove.
-            os << temp.getName() << "\n";
+        do{
+            temp2 = Clan::getMax(filtered_set);
+            if(temp2 == nullptr) break;
+            os << (*temp2).getName() << "\n";
             filtered_set.erase(temp2);
-            it = filtered_set.begin();
-            it2 = filtered_set.begin();
-        }
+        }while(temp2 != nullptr);
         return os;
-    }*/
+    }
 }
