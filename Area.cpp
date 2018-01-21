@@ -27,13 +27,10 @@ void Area::groupArrive(const string &group_name, const string &clan,
     auto iterator = clan_map.find(clan);
     if (iterator == clan_map.end()) throw AreaClanNotFoundInMap();
 
-    GroupPointer group_ptr;
-    try {
-        group_ptr = iterator->second.getGroup(group_name);
-    }
-    catch (ClanGroupNotFound &e) {
+    if(!iterator->second.doesContain(group_name)) {
         throw AreaGroupNotInClan();
     }
+    GroupPointer group_ptr = iterator->second.getGroup(group_name);
 
     for (auto i = groups.begin(); i != groups.end(); i++) {
         if (*i == group_ptr) throw AreaGroupAlreadyIn();
