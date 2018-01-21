@@ -31,7 +31,7 @@ bool testExceptions() {
 }
 
 bool testUnite() {
-    /*Plain area("area_name");
+    Plain area("area_name");
     std::map<string, Clan> clan_map;
 
     clan_map.insert(std::pair<string, Clan>("clan1", Clan("clan1")));
@@ -44,13 +44,14 @@ bool testUnite() {
 
     ASSERT_NO_EXCEPTION(area.groupArrive("group1", "clan2", clan_map));
     ASSERT_NO_EXCEPTION(area.groupArrive("group2", "clan2", clan_map));
-    ASSERT_FALSE(clan_map.at("clan2").doesContain("group2"));
+    Group& c = *clan_map.at("clan2").getGroup("group2");
+    ASSERT_FALSE(c.getSize()==9);
     ASSERT_TRUE(clan_map.at("clan2").doesContain("group1"));
     ASSERT_TRUE(clan_map.at("clan2").getGroup("group1")->getSize() == 4);
 
     MtmSet<string> set = area.getGroupsNames();
     ASSERT_TRUE(set.size() == 1);
-    ASSERT_TRUE(set.contains("group1"));*/
+    ASSERT_TRUE(set.contains("group1"));
 
     return true;
 }
