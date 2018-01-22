@@ -33,6 +33,9 @@ namespace mtm {
          */
         ~Plain() override;
 
+        /**
+         * overrides from Area
+         */
         void groupArrive(const string &group_name, const string &clan_name,
                          map<string, Clan> &clan_map) override;
 

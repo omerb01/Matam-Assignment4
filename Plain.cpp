@@ -22,8 +22,8 @@ static std::vector<GroupPointer>::const_iterator getStrongestGroup
 }
 
 static bool uniteWithStrongestGroup(std::vector<GroupPointer> groups,
-                                    const GroupPointer &new_group, int
-                                    clan_size) {
+                                    const GroupPointer &new_group,
+                                    int clan_size) {
     while (!groups.empty()) {
         auto strongest_group = getStrongestGroup(groups);
 

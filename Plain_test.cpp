@@ -46,6 +46,7 @@ bool testUnite() {
     ASSERT_NO_EXCEPTION(area.groupArrive("group2", "clan2", clan_map));
     Group& c = *clan_map.at("clan2").getGroup("group2");
     ASSERT_FALSE(c.getSize()==9);
+    // TODO: CHECK WHY C ISNT "group1" with Ilya
     ASSERT_TRUE(clan_map.at("clan2").doesContain("group1"));
     ASSERT_TRUE(clan_map.at("clan2").getGroup("group1")->getSize() == 4);
 
