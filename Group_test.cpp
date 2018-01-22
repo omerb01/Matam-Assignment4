@@ -215,7 +215,10 @@ bool testUnite() {
     Group group7("B", "Alpha", 1, 2, 3, 4, 80);
     Group group8("A", "Alpha", 1, 2, 3, 4, 71);
     ASSERT_FALSE(group7.unite(group8, 2));
-    cout<<group1<<endl;
+    Group group9("B", "Alpha", 1, 2, 3, 4, 80);
+    Group group10("A", "Alpha", 1, 2, 3,4, 80);
+    group9.unite(group10, 50);
+    cout<<group10<<endl;
     return true;
 }
 
@@ -253,14 +256,17 @@ bool testTrade() {
     Group group4("Z", "Alpha", 5, 5, 4, 1, 5);
     Group group5("A", "Alpha", 1, 1, 1, 2, 3);
     ASSERT_TRUE(group4.trade(group5)); //group4: tools-2,foor-3;group5-tools-3,food-0
+    Group group6("group1", "Fetta", 10, 10, 3, 1, 70);
+    Group group7("group2", "Fetta", 10, 10, 5, 10, 70);
+    group7.trade(group6);
     return true;
 }
 
 bool testPrint(){
-    Group group1("a", "Alpha", 5, 5, 6, 2, 95);
-    Group group2("b", "Alpha", 5, 5, 7, 2, 80);
+    Group group1("a", "Alpha", 10, 10, 8, 7,77);
+    Group group2("b", "Alpha", 10, 10, 8, 2, 77);
     ASSERT_NO_EXCEPTION(group1.unite(group2,20));
-    ASSERT_NO_EXCEPTION(cout << group1 <<endl);
+    //ASSERT_NO_EXCEPTION(cout << group1 <<endl);
     return true;
 }
 
