@@ -10,8 +10,8 @@ Plain::Plain(const std::string &name) : Area(name) {}
 
 Plain::~Plain() = default;
 
-static std::vector<GroupPointer>::const_iterator getStrongestGroup
-        (const std::vector<GroupPointer> &groups) {
+static vector<GroupPointer>::iterator getStrongestGroup
+        (vector<GroupPointer> &groups) {
     auto strongest_group = groups.begin();
 
     for (auto i = groups.begin(); i != groups.end(); i++) {
@@ -21,7 +21,7 @@ static std::vector<GroupPointer>::const_iterator getStrongestGroup
     return strongest_group;
 }
 
-static bool uniteWithStrongestGroup(std::vector<GroupPointer> groups,
+static bool uniteWithStrongestGroup(vector<GroupPointer> groups,
                                     const GroupPointer &new_group,
                                     int clan_size) {
     while (!groups.empty()) {
@@ -63,7 +63,7 @@ static string getDividedGroupName(map<string, Clan> &clan_map,
 static void checkGroupsArriveExceptions(const string &group_name,
                                         const string &clan_name,
                                         const map<string, Clan> &clan_map,
-                                        const std::vector<GroupPointer> &groups) {
+                                        const vector<GroupPointer> &groups) {
     auto clan_it = clan_map.find(clan_name);
 
     if (clan_it == clan_map.end()) {

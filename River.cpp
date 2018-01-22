@@ -10,8 +10,8 @@ River::River(const std::string &name) : Area(name) {}
 
 River::~River() = default;
 
-static std::vector<GroupPointer>::const_iterator getStrongestGroup
-        (const std::vector<GroupPointer> &groups) {
+static vector<GroupPointer>::iterator getStrongestGroup
+        (vector<GroupPointer> &groups) {
     auto strongest_group = groups.begin();
 
     for (auto i = groups.begin(); i != groups.end(); i++) {
@@ -21,8 +21,8 @@ static std::vector<GroupPointer>::const_iterator getStrongestGroup
     return strongest_group;
 }
 
-static bool tradeWithStrongestGroup(std::vector<GroupPointer> groups,
-                                    std::map<string, Clan> &clan_map,
+static bool tradeWithStrongestGroup(vector<GroupPointer> groups,
+                                    map<string, Clan> &clan_map,
                                     const string &clan_name,
                                     const GroupPointer &new_group) {
     while (!groups.empty()) {
@@ -44,7 +44,7 @@ static bool tradeWithStrongestGroup(std::vector<GroupPointer> groups,
 static void checkGroupsArriveExceptions(const string &group_name,
                                         const string &clan_name,
                                         const map<string, Clan> &clan_map,
-                                        const std::vector<GroupPointer> &groups) {
+                                        const vector<GroupPointer> &groups) {
     auto clan_it = clan_map.find(clan_name);
 
     if (clan_it == clan_map.end()) {

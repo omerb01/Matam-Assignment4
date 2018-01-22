@@ -7,6 +7,8 @@
 
 #include "Area.h"
 
+using std::vector;
+
 namespace mtm {
     class Plain : public Area {
     public:
