@@ -2,9 +2,9 @@
 #include "../Group.h"
 #include "../Clan.h"
 #include "../Area.h"
-#include "Plain.h"
-#include "Mountain.h"
-#include "River.h"
+#include "../Plain.h"
+#include "../Mountain.h"
+#include "../River.h"
 #include "../World.h"
 #include "../exceptions.h"
 
