@@ -47,7 +47,6 @@ bool testTrade() {
     ASSERT_NO_EXCEPTION(area.groupArrive("group1", "clan2", clan_map));
     ASSERT_NO_EXCEPTION(area.groupArrive("group2", "clan2", clan_map));
     ASSERT_NO_EXCEPTION(area.groupArrive("group3", "clan2", clan_map));
-    // TODO: check why some groups' food and tools dont change
 
     return true;
 }

@@ -71,10 +71,4 @@ void River::groupArrive(const string &group_name, const string &clan_name,
     tradeWithStrongestGroup(groups, clan_map, clan_name, new_group_ptr);
 
     groups.push_back(new_group_ptr);
-
-    // for debugging //
-    /*for(auto i = groups.begin(); i != groups.end(); i++) {
-        Group& g = *(*i);
-        if(g == *(*i)) continue;
-    }*/
 }
