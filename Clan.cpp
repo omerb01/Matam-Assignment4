@@ -87,18 +87,12 @@ namespace mtm {
         friend_clans.unite(other.friend_clans);
         if (new_name == name) {
             ChangeClan(other, new_name);
-        } else if (new_name == other.name) {
+        } else{
             ChangeClan(*this, new_name);
-        } else {
-            ChangeClan(*this, new_name);
-            ChangeClan(other, new_name);
         }
         GroupPointer temp= nullptr;
-        for (auto it = other.groups.begin(); it != other.groups.end(); it++) {
-            other.groups.erase(temp);
-            temp=*it;
-            groups.insert(*(it));
-        }
+        groups.unite(other.groups);
+        other.groups.clear();
         return *this;
     }
 
