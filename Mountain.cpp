@@ -32,7 +32,7 @@ namespace mtm {
             current_dominating_group = getDomintaingGroupObject(clan_map);
         } else {
 
-            if (arriving_group_p->getClan() == current_dominating_group->getName()) {
+            if (arriving_group_p->getName() == current_dominating_group->getName()) {
                 throw AreaGroupAlreadyIn();
             }
             if (*arriving_group_p > *current_dominating_group) {
