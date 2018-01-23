@@ -156,16 +156,17 @@ void World::moveGroup(const string& group_name, const string& destination){
             group_clan = clan_pair.first;
         }
     }
-    if(clan_map.find(group_name) == clan_map.end()){
-        throw WorldClanNotFound();
-    }
-    if(area_map.find(destination) != area_map.find(destination)){
+    if(group_object == nullptr){
         throw WorldGroupNotFound();
+    }
+    if(area_map.find(destination) == area_map.end()){
+        throw WorldAreaNotFound();
     }
     for (const auto &area_pair: area_map){
         auto it = area_pair.second->getGroupsNames().find(group_name);
         if(it != area_pair.second->getGroupsNames().end()){
             group_current_area = area_pair.second;
+            break;
         }
     }
     for (const auto &area_pair: area_map){
@@ -173,7 +174,7 @@ void World::moveGroup(const string& group_name, const string& destination){
         if(it == area_pair.second->getGroupsNames().end() && area_pair.first == destination){
             if(group_current_area->isReachable(destination)){
                 area_pair.second->groupArrive(group_name,group_clan,clan_map);
-            }else if(group_current_area->isReachable(destination)){
+            }else if(!group_current_area->isReachable(destination)){
                 throw WorldAreaNotReachable();
             }
         }else if(it != area_pair.second->getGroupsNames().end() && area_pair.first == destination){
