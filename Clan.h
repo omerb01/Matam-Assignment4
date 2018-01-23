@@ -4,7 +4,6 @@
 #include <string>
 #include "Group.h"
 #include "MtmSet.h"
-#include "Clan.h"
 #include <ostream>
 #include <memory>
 
