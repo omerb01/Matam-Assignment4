@@ -23,8 +23,8 @@ namespace mtm {
         if (!((it->second).doesContain(group_name))) {
             throw AreaGroupNotInClan();
         }
-        Group arriving = *(it->second.getGroup(group_name));
-        Group current_dominating_group = getDomintaingGroupObject(clan_map);
+        //Group arriving = *(it->second.getGroup(group_name));
+        GroupPointer current_dominating_group = getDomintaingGroupObject(clan_map);
         GroupPointer arriving_group_p = (it->second.getGroup(group_name));
         if (dominating_group.empty()) {
             dominating_group = group_name;
@@ -32,33 +32,36 @@ namespace mtm {
             current_dominating_group = getDomintaingGroupObject(clan_map);
         } else {
 
-            if (arriving.getName() == current_dominating_group.getName()) {
+            if (arriving_group_p->getClan() == current_dominating_group->getName()) {
                 throw AreaGroupAlreadyIn();
             }
-            if (arriving > current_dominating_group) {
-                dominating_group = arriving.getName();
-            } else if (arriving.getClan() !=
-                       current_dominating_group.getClan()) {
-                FIGHT_RESULT result = arriving.fight(current_dominating_group);
+            if (*arriving_group_p > *current_dominating_group) {
+                dominating_group = arriving_group_p->getName();
+            } else if (arriving_group_p->getClan() !=
+                       current_dominating_group->getClan()) {
+                FIGHT_RESULT result = arriving_group_p->fight(*current_dominating_group);
                 if (result == WON) {
-                    dominating_group = arriving.getName();
+                    dominating_group = arriving_group_p->getName();
                 }
             }
             groups.push_back(arriving_group_p);
         }
     }
 
-    Group Mountain::getDomintaingGroupObject(map<string, Clan> &clan_map) {
+    /*Group*/GroupPointer Mountain::getDomintaingGroupObject(map<string, Clan> &clan_map) {
 
-        Group current_dominating_group("dummy", 1, 1);
+        //Group current_dominating_group("dummy", 1, 1);
+        GroupPointer current_dominating_group=nullptr;
         for (const auto &clan_pair: clan_map) {
 
             if ((clan_pair.second).doesContain(dominating_group)) {
-                current_dominating_group = *((clan_pair).second.getGroup(
+                current_dominating_group = ((clan_pair).second.getGroup(
                         dominating_group));
             }
         }
-        dominating_clan = current_dominating_group.getClan();
+        if(current_dominating_group != nullptr) {
+            dominating_clan = current_dominating_group->getClan();
+        }
         return current_dominating_group;
     }
 

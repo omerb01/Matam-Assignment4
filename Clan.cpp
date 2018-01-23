@@ -125,7 +125,7 @@ namespace mtm {
     std::ostream &operator<<(std::ostream &os, const Clan &clan) {
         MtmSet<mtm::GroupPointer> filtered_set = clan.groups;
         MtmSet<GroupPointer>::iterator it2;
-        os << "Clan's name: " << clan.name << "\nClan's groups: \n";
+        os << "Clan's name: " << clan.name << "\nClan's groups:\n";
         GroupPointer temp2 = nullptr;
         do{
             temp2 = Clan::getMax(filtered_set);

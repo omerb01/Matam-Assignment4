@@ -12,7 +12,7 @@ namespace mtm {
         // The current dominating group in the mountain. Empty if such a group doesn't exist
         std::string dominating_group;
         std::string dominating_clan;
-        Group getDomintaingGroupObject(map<string, Clan> &clan_map);
+        GroupPointer getDomintaingGroupObject(map<string, Clan> &clan_map);
         const std::string getMaximumGroupMount(const std::string &group_name);
         const std::string getMaximumGroupClan(const std::string &group_name);
     public:
