@@ -28,8 +28,8 @@ void World::addClan(const string &clan_name) {
 void World::addArea(const string &area_name, AreaType type) {
     if (area_name.empty()) throw WorldInvalidArgument();
 
-    auto iterator = clan_map.find(area_name);
-    if (iterator != clan_map.end()) throw WorldAreaNameIsTaken();
+    auto iterator = area_map.find(area_name);
+    if (iterator != area_map.end()) throw WorldAreaNameIsTaken();
 
     if (type == PLAIN) {
         AreaPtr area_ptr(new Plain(area_name));
@@ -45,12 +45,13 @@ void World::addArea(const string &area_name, AreaType type) {
     }
 }
 
-static bool isGroupAlreadyExists(const map<string, Clan> &clan_map,
-                                 const string &group_name) {
+static map<string, Clan>::const_iterator findClanOfGroup
+        (const map<string, Clan> &clan_map,
+         const string &group_name) {
     for (auto i = clan_map.begin(); i != clan_map.end(); i++) {
-        if(i->second.doesContain(group_name)) return false;
+        if (i->second.doesContain(group_name)) return i;
     }
-    return true;
+    return clan_map.end();
 }
 
 void World::addGroup(const string &group_name, const string &clan_name,
@@ -58,14 +59,14 @@ void World::addGroup(const string &group_name, const string &clan_name,
                      const string &area_name) {
     try {
         Group new_group(group_name, num_children, num_adults);
-        if(isGroupAlreadyExists(clan_map, group_name)) {
+        if (findClanOfGroup(clan_map, group_name) != clan_map.end()) {
             throw WorldGroupNameIsTaken();
         }
 
         auto clan_it = clan_map.find(clan_name);
-        if(clan_it == clan_map.end()) throw WorldClanNotFound();
+        if (clan_it == clan_map.end()) throw WorldClanNotFound();
         auto area_it = area_map.find(area_name);
-        if(area_it == area_map.end()) throw WorldAreaNotFound();
+        if (area_it == area_map.end()) throw WorldAreaNotFound();
 
         clan_it->second.addGroup(new_group);
         area_it->second->groupArrive(group_name, clan_name, clan_map);
@@ -73,6 +74,62 @@ void World::addGroup(const string &group_name, const string &clan_name,
     catch (GroupInvalidArgs &e) {
         throw WorldInvalidArgument();
     }
+}
+
+static map<string, AreaPtr>::const_iterator findAreaOfGroup
+        (const map<string, AreaPtr> &area_map,
+         const string &group_name) {
+    for (auto i = area_map.begin(); i != area_map.end(); i++) {
+        MtmSet<string> groups = i->second->getGroupsNames();
+        if(groups.contains(group_name)) return i;
+    }
+    return area_map.end();
+}
+
+void World::printGroup(std::ostream &os, const string &group_name) const {
+    auto clan_it = findClanOfGroup(clan_map, group_name);
+    if(clan_it == clan_map.end()) throw WorldGroupNotFound();
+
+    auto area_it = findAreaOfGroup(area_map, group_name);
+
+    Group &group = *clan_it->second.getGroup(group_name);
+    os << group << "Group's current area: " << area_it->first << std::endl;
+}
+
+void World::printClan(std::ostream &os, const string &clan_name) const {
+    auto clan_it = clan_map.find(clan_name);
+    if (clan_it == clan_map.end()) throw WorldClanNotFound();
+
+    os << clan_it->second;
+}
+
+void World::uniteClans(const string &clan1_name, const string &clan2_name,
+                       const string &new_name) {
+    if(new_name.empty()) throw WorldInvalidArgument();
+
+    auto iterator = clan_map.find(new_name);
+    if (iterator != clan_map.end() && new_name != clan1_name &&
+            new_name != clan2_name) {
+        throw WorldClanNameIsTaken();
+    }
+
+    auto clan1_it = clan_map.find(clan1_name);
+    auto clan2_it = clan_map.find(clan2_name);
+    if(clan1_it == clan_map.end() || clan2_it == clan_map.end()) {
+        throw WorldClanNotFound();
+    }
+
+    clan1_it->second.unite(clan2_it->second, new_name);
+}
+
+void World::makeFriends(const string &clan1_name, const string &clan2_name) {
+    auto clan1_it = clan_map.find(clan1_name);
+    auto clan2_it = clan_map.find(clan2_name);
+    if(clan1_it == clan_map.end() || clan2_it == clan_map.end()) {
+        throw WorldClanNotFound();
+    }
+
+    clan1_it->second.makeFriend(clan2_it->second);
 }
 
 void World::makeReachable(const string& from, const string& to){
