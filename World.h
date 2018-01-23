@@ -13,7 +13,7 @@ namespace mtm{
     
     class World{
         map<string, Clan> clan_map;
-        map<string, Area> area_map;
+        map<string, AreaPtr> area_map;
 
     public:
         /**
