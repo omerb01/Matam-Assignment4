@@ -179,6 +179,7 @@ void World::moveGroup(const string& group_name, const string& destination){
         auto it = area_pair.second->getGroupsNames().find(group_name);
         if(it == area_pair.second->getGroupsNames().end() && area_pair.first == destination){
             if(group_current_area->isReachable(destination)){
+                group_current_area->groupLeave(group_name);
                 area_pair.second->groupArrive(group_name,group_clan,clan_map);
             }else if(!group_current_area->isReachable(destination)){
                 throw WorldAreaNotReachable();

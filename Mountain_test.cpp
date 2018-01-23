@@ -72,7 +72,7 @@ bool testGroupLeave() {
 }
 
 int main() {
-    //RUN_TEST(testConstructor);
-    //RUN_TEST(testGroupArrive);
+    RUN_TEST(testConstructor);
+    RUN_TEST(testGroupArrive);
     RUN_TEST(testGroupLeave);
 }
