@@ -1,9 +1,9 @@
 //
 // Created by Ilya on 1/19/2018.
 //
-#include "testMacros.h"
-#include "Clan.h"
-#include "exceptions.h"
+#include "../testMacros.h"
+#include "../Clan.h"
+#include "../exceptions.h"
 
 using namespace mtm;
 

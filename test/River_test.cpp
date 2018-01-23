@@ -1,8 +1,8 @@
 //
 // Created by Omer on 22/01/2018.
 //
-#include "testMacros.h"
-#include "River.h"
+#include "../testMacros.h"
+#include "../River.h"
 
 using namespace mtm;
 

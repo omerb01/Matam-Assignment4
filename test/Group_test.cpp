@@ -2,9 +2,9 @@
 // Created by Omer on 18/01/2018.
 //
 
-#include "testMacros.h"
-#include "Group.h"
-#include "exceptions.h"
+#include "../testMacros.h"
+#include "../Group.h"
+#include "../exceptions.h"
 
 using namespace mtm;
 

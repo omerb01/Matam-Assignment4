@@ -2,8 +2,8 @@
 // Created by Ilya on 1/21/2018.
 //
 
-#include "testMacros.h"
-#include "Mountain.h"
+#include "../testMacros.h"
+#include "../Mountain.h"
 
 using namespace mtm;
 

@@ -2,8 +2,8 @@
 // Created by Omer on 18/01/2018.
 //
 
-#include "MtmSet.h"
-#include "testMacros.h"
+#include "../MtmSet.h"
+#include "../testMacros.h"
 
 using namespace mtm;
 

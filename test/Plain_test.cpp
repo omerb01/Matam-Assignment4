@@ -1,8 +1,8 @@
 //
 // Created by Omer on 21/01/2018.
 //
-#include "testMacros.h"
-#include "Plain.h"
+#include "../testMacros.h"
+#include "../Plain.h"
 
 using namespace mtm;
 

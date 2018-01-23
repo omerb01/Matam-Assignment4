@@ -2,9 +2,9 @@
 // Created by Omer on 23/01/2018.
 //
 
-#include "exceptions.h"
-#include "World.h"
-#include "testMacros.h"
+#include "../exceptions.h"
+#include "../World.h"
+#include "../testMacros.h"
 
 using namespace mtm;
 

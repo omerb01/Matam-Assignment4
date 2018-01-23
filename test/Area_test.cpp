@@ -1,9 +1,9 @@
 //
 // Created by Omer on 20/01/2018.
 //
-#include "testMacros.h"
-#include "Area.h"
-#include "exceptions.h"
+#include "../testMacros.h"
+#include "../Area.h"
+#include "../exceptions.h"
 
 using namespace mtm;
 
