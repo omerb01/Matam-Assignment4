@@ -119,7 +119,13 @@ void World::uniteClans(const string &clan1_name, const string &clan2_name,
         throw WorldClanNotFound();
     }
 
-    clan1_it->second.unite(clan2_it->second, new_name);
+    Clan clan2 = clan2_it->second;
+    clan_map.erase(clan2_it);
+    clan1_it->second.unite(clan2, new_name);
+
+    Clan clan1 = clan1_it->second;
+    clan_map.erase(clan1_it);
+    clan_map.insert(pair<string, Clan>(new_name, clan1));
 }
 
 void World::makeFriends(const string &clan1_name, const string &clan2_name) {
