@@ -43,13 +43,13 @@ bool testGroupArrive() {
 
 bool testGroupLeave() {
     Mountain mount1("Hermon");
-    Clan clan1("Blue");
-    clan1.addGroup(Group("Blue1", "Blue", 1, 2, 3, 4, 5));
-    clan1.addGroup(Group("Blue2", "Blue", 5, 4, 3, 2, 1));
-    clan1.addGroup(Group("Blue3", "Blue", 5, 4, 2, 1, 1));
-    Clan clan2("Red");
-    clan2.addGroup(Group("Red1", "Red", 5, 6, 7, 4, 3));
-    clan2.addGroup(Group("Red2", "Red", 9, 8, 7, 6, 5));
+    Clan clan1("clan1");
+    clan1.addGroup(Group("Blue1", "clan1", 1, 2, 3, 4, 5));
+    clan1.addGroup(Group("Blue2", "clan1", 5, 4, 3, 2, 1));
+    clan1.addGroup(Group("Blue3", "clan1", 5, 4, 2, 1, 1));
+    Clan clan2("clan2");
+    clan2.addGroup(Group("Red1", "clan2", 5, 6, 7, 4, 3));
+    clan2.addGroup(Group("Red2", "clan2", 9, 8, 7, 6, 5));
     std::map<std::string, Clan> clan_map;
     clan_map.insert(std::pair<string, Clan>("clan1", clan1));
     clan_map.insert(std::pair<string, Clan>("clan2", clan2));
@@ -57,7 +57,7 @@ bool testGroupLeave() {
     ASSERT_NO_EXCEPTION(mount1.groupLeave("Blue1"));
     MtmSet<std::string> group_names = mount1.getGroupsNames();
     ASSERT_TRUE(group_names.empty());
-    ASSERT_NO_EXCEPTION(mount1.groupLeave("Blue1"));
+    ASSERT_EXCEPTION(mount1.groupLeave("Blue1"),AreaGroupNotFound);
     ASSERT_NO_EXCEPTION(mount1.groupArrive("Red1","clan2",clan_map));
     ASSERT_NO_EXCEPTION(mount1.groupArrive("Red2","clan2",clan_map));
     ASSERT_NO_EXCEPTION(mount1.groupArrive("Blue2","clan1",clan_map));
@@ -72,7 +72,7 @@ bool testGroupLeave() {
 }
 
 int main() {
-    RUN_TEST(testConstructor);
-    RUN_TEST(testGroupArrive);
+    //RUN_TEST(testConstructor);
+    //RUN_TEST(testGroupArrive);
     RUN_TEST(testGroupLeave);
 }

@@ -101,7 +101,7 @@ namespace mtm {
 
     void Mountain::groupLeave(const std::string &group_name) {
         if (dominating_group.empty()) {
-            return; //TODO:No exception because heredity?
+            throw AreaGroupNotFound();
         }
         for (auto i = groups.begin(); i != groups.end(); i++) {
             if ((*i)->getName() == group_name) {
