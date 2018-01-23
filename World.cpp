@@ -74,3 +74,53 @@ void World::addGroup(const string &group_name, const string &clan_name,
         throw WorldInvalidArgument();
     }
 }
+
+void World::makeReachable(const string& from, const string& to){
+    if(area_map.find(from) == area_map.end() || area_map.find(to) == area_map.end()){
+        throw WorldClanNotFound();
+    }
+    for (const auto &area_pair: area_map){
+        if((area_pair.first) == from){
+            (*area_pair.second).addReachableArea(to);
+        }
+        if((area_pair.first) == to){
+            (*area_pair.second).addReachableArea(from);
+        }
+    }
+}
+
+void World::moveGroup(const string& group_name, const string& destination){
+    AreaPtr group_current_area= nullptr;
+    GroupPointer group_object = nullptr;
+    std::string group_clan="";
+    for (const auto &clan_pair: clan_map){
+        if(clan_pair.second.doesContain(group_name)){
+            group_object = clan_pair.second.getGroup(group_name);
+            group_clan = clan_pair.first;
+        }
+    }
+    if(clan_map.find(group_name) == clan_map.end()){
+        throw WorldClanNotFound();
+    }
+    if(area_map.find(destination) != area_map.find(destination)){
+        throw WorldGroupNotFound();
+    }
+    for (const auto &area_pair: area_map){
+        auto it = area_pair.second->getGroupsNames().find(group_name);
+        if(it != area_pair.second->getGroupsNames().end()){
+            group_current_area = area_pair.second;
+        }
+    }
+    for (const auto &area_pair: area_map){
+        auto it = area_pair.second->getGroupsNames().find(group_name);
+        if(it == area_pair.second->getGroupsNames().end() && area_pair.first == destination){
+            if(group_current_area->isReachable(destination)){
+                area_pair.second->groupArrive(group_name,group_clan,clan_map);
+            }else if(group_current_area->isReachable(destination)){
+                throw WorldAreaNotReachable();
+            }
+        }else if(it != area_pair.second->getGroupsNames().end() && area_pair.first == destination){
+            throw WorldGroupAlreadyInArea();
+        }
+    }
+}
