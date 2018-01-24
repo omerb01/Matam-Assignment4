@@ -16,6 +16,7 @@ namespace mtm {
 
     void Mountain::groupArrive(const string &group_name, const string &clan,
                                map<string, Clan> &clan_map) {
+        //TODO: fix function length
         auto it = clan_map.find(clan);
         if (it == clan_map.end()) {
             throw AreaClanNotFoundInMap();
@@ -35,7 +36,8 @@ namespace mtm {
             if (arriving_group_p->getName() == current_dominating_group->getName()) {
                 throw AreaGroupAlreadyIn();
             }
-            if (*arriving_group_p > *current_dominating_group) {
+            if (*arriving_group_p > *current_dominating_group && arriving_group_p->getClan() ==
+                                                                 current_dominating_group->getClan()) {
                 dominating_group = arriving_group_p->getName();
             } else if (arriving_group_p->getClan() !=
                        current_dominating_group->getClan()) {
