@@ -131,7 +131,9 @@ namespace mtm {
         do{
             temp2 = Clan::getMax(filtered_set);
             if(temp2 == nullptr) break;
-            os << (*temp2).getName() << "\n";
+            if(!(temp2->getName().empty())) {
+                os << (*temp2).getName() << "\n";
+            }
             filtered_set.erase(temp2);
         }while(temp2 != nullptr);
         return os;
