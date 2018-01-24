@@ -86,6 +86,7 @@ bool testUnite() {
 }
 
 bool testPrint() {
+    ostringstream os;
     Clan clan1("Alpha");
     Group group1("Zero", "Alpha", 3, 2, 3, 4, 5);
     Group group2("One", "Alpha", 1, 1, 2, 1, 3);
@@ -97,10 +98,18 @@ bool testPrint() {
     clan1.addGroup(group5);
     Clan clan2("Alpha");
     Group group66("Three", "Alpha", 7, 8, 9, 10, 11);
-    cout << clan2 << endl;
     ASSERT_NO_EXCEPTION(clan2.addGroup(group66));
-    cout << clan2 << endl;
-    cout << clan1 << endl;
+    ASSERT_NO_EXCEPTION(os << clan2);
+    ASSERT_TRUE(VerifyOutput(os, "Clan's name: Alpha\n"
+            "Clan's groups:\n"
+            "Three\n"));
+    ASSERT_NO_EXCEPTION(os << clan1);
+    ASSERT_TRUE(VerifyOutput(os, "Clan's name: Alpha\n"
+            "Clan's groups:\n"
+            "Three\n"
+            "Two\n"
+            "Zero\n"
+            "One\n"));
     return true;
 }
 

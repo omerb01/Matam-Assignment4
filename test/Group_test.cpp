@@ -218,7 +218,6 @@ bool testUnite() {
     Group group9("B", "Alpha", 1, 2, 3, 4, 80);
     Group group10("A", "Alpha", 1, 2, 3,4, 80);
     group9.unite(group10, 50);
-    cout<<group10<<endl;
     return true;
 }
 
@@ -263,10 +262,19 @@ bool testTrade() {
 }
 
 bool testPrint(){
+    ostringstream os;
     Group group1("a", "Alpha", 10, 10, 8, 7,77);
     Group group2("b", "Alpha", 10, 10, 8, 2, 77);
     ASSERT_NO_EXCEPTION(group1.unite(group2,20));
-    //ASSERT_NO_EXCEPTION(cout << group1 <<endl);
+    ASSERT_NO_EXCEPTION(cout << group1 <<endl);
+    ASSERT_NO_EXCEPTION(os << group1);
+    ASSERT_TRUE(VerifyOutput(os, "Group's name: a\n"
+            "Group's clan: Alpha\n"
+            "Group's children: 10\n"
+            "Group's adults: 10\n"
+            "Group's tools: 8\n"
+            "Group's food: 7\n"
+            "Group's morale: 77\n"));
     return true;
 }
 
