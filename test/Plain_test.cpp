@@ -6,7 +6,7 @@
 
 using namespace mtm;
 
-bool testExceptions() {
+bool testPlainExceptions() {
     Plain area("area_name");
     std::map<string, Clan> clan_map;
 
@@ -30,7 +30,7 @@ bool testExceptions() {
     return true;
 }
 
-bool testUnite() {
+bool testPlainUnite() {
     Plain area("area_name");
     std::map<string, Clan> clan_map;
 
@@ -55,7 +55,7 @@ bool testUnite() {
     return true;
 }
 
-bool testDivide() {
+bool testPlainDivide() {
     Plain area("area_name");
     std::map<string, Clan> clan_map;
 
@@ -81,7 +81,7 @@ bool testDivide() {
     return true;
 }
 
-bool testNormalGroupArrive() {
+bool testPlainNormalGroupArrive() {
     Plain area("area_name");
     std::map<string, Clan> clan_map;
 
@@ -107,9 +107,9 @@ bool testNormalGroupArrive() {
 }
 
 int main() {
-    RUN_TEST(testExceptions);
-    RUN_TEST(testUnite);
-    RUN_TEST(testDivide);
-    RUN_TEST(testNormalGroupArrive);
+    RUN_TEST(testPlainExceptions);
+    RUN_TEST(testPlainUnite);
+    RUN_TEST(testPlainDivide);
+    RUN_TEST(testPlainNormalGroupArrive);
     return 0;
 }

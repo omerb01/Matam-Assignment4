@@ -6,7 +6,7 @@
 
 using namespace mtm;
 
-bool testExceptions() {
+bool testRiverExceptions() {
     River area("area_name");
     std::map<string, Clan> clan_map;
 
@@ -30,7 +30,7 @@ bool testExceptions() {
     return true;
 }
 
-bool testTrade() {
+bool testRiverTrade() {
     River area("area_name");
     std::map<string, Clan> clan_map;
 
@@ -52,7 +52,7 @@ bool testTrade() {
 }
 
 int main() {
-    RUN_TEST(testExceptions)
-    RUN_TEST(testTrade)
+    RUN_TEST(testRiverExceptions)
+    RUN_TEST(testRiverTrade)
     return 0;
 }

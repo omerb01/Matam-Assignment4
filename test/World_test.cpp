@@ -82,11 +82,11 @@ bool testUniteClans() {
                      WorldClanNotFound);
 
     ASSERT_NO_EXCEPTION(world.uniteClans("TEST_CLAN1", "TEST_CLAN2", "CLAN1"));
-    ASSERT_NO_EXCEPTION(world.addClan("TEST_CLAN1"));
-    ASSERT_NO_EXCEPTION(world.addClan("TEST_CLAN2"));
+    ASSERT_NO_EXCEPTION(world.addClan("NEW_CLAN1"));
+    ASSERT_NO_EXCEPTION(world.addClan("NEW_CLAN2"));
     ASSERT_EXCEPTION(world.uniteClans("TEST1", "TEST2", "CLAN1"),
                      WorldClanNameIsTaken);
-    ASSERT_NO_EXCEPTION(world.uniteClans("TEST_CLAN1", "TEST_CLAN2", "CLAN2"));
+    ASSERT_NO_EXCEPTION(world.uniteClans("NEW_CLAN1", "NEW_CLAN2", "CLAN2"));
 
     world.addArea("PLAIN", PLAIN);
     world.addGroup("GROUP1", "CLAN1", 0, 1, "PLAIN");
@@ -124,7 +124,7 @@ bool testReachable(){
     ASSERT_NO_EXCEPTION(world.addArea("Haifa",PLAIN));
     ASSERT_NO_EXCEPTION(world.addArea("Morodor", MOUNTAIN));
     ASSERT_NO_EXCEPTION(world.makeReachable("Haifa", "Morodor"));
-    ASSERT_EXCEPTION(world.makeReachable("Haifa","M0rodor"),WorldClanNotFound);
+    ASSERT_EXCEPTION(world.makeReachable("Haifa","M0rodor"),WorldAreaNotFound);
     return true;
 }
 
@@ -143,6 +143,30 @@ bool testMoveGroup(){
     ASSERT_EXCEPTION(world.moveGroup("Blue","faifa"),WorldAreaNotFound);
     return true;
 }
+
+bool testUsedNames() {
+    World world;
+    world.addClan("CLAN1");
+    world.addClan("CLAN2");
+
+    ASSERT_NO_EXCEPTION(world.uniteClans("CLAN1", "CLAN2", "NEW CLAN1"));
+    ASSERT_EXCEPTION(world.addClan("CLAN1"),WorldClanNameIsTaken);
+    ASSERT_EXCEPTION(world.addClan("CLAN2"),WorldClanNameIsTaken);
+    ASSERT_EXCEPTION(world.addClan("NEW CLAN1"),WorldClanNameIsTaken);
+
+    ASSERT_NO_EXCEPTION(world.addClan("NEW CLAN2"));
+    ASSERT_NO_EXCEPTION(world.uniteClans("NEW CLAN1", "NEW CLAN2", "TEST1"));
+    ASSERT_EXCEPTION(world.addClan("NEW CLAN1"),WorldClanNameIsTaken);
+    ASSERT_EXCEPTION(world.addClan("NEW CLAN2"),WorldClanNameIsTaken);
+
+    ASSERT_NO_EXCEPTION(world.addClan("TEST2"));
+    ASSERT_EXCEPTION(world.uniteClans("TEST1", "TEST2", "NEW CLAN1"),
+                     WorldClanNameIsTaken);
+    ASSERT_NO_EXCEPTION(world.uniteClans("TEST1", "TEST2", "TEST1"));
+
+    return true;
+}
+
 int main() {
     RUN_TEST(testReachable);
     RUN_TEST(testMoveGroup);
@@ -151,5 +175,6 @@ int main() {
     RUN_TEST(testAddGroup);
     RUN_TEST(testUniteClans);
     RUN_TEST(testMakeFriends);
+    RUN_TEST(testUsedNames);
     return 0;
 }

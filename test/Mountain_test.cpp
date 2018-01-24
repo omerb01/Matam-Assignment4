@@ -7,14 +7,14 @@
 
 using namespace mtm;
 
-bool testConstructor() {
+bool testMountainConstructor() {
     Mountain mount1("Hermon");
     Mountain mount2("Meiron");
     ASSERT_EXCEPTION(Mountain mount3(""), AreaInvalidArguments);
     return true;
 }
 
-bool testGroupArrive() {
+bool testMountainGroupArrive() {
     Mountain mount1("Hermon");
     Clan clan1("Blue");
     clan1.addGroup(Group("Blue1", "Blue", 1, 2, 3, 4, 5));
@@ -41,7 +41,7 @@ bool testGroupArrive() {
 }
 
 
-bool testGroupLeave() {
+bool testMountainGroupLeave() {
     Mountain mount1("Hermon");
     Clan clan1("clan1");
     clan1.addGroup(Group("Blue1", "clan1", 1, 2, 3, 4, 5));
@@ -72,7 +72,7 @@ bool testGroupLeave() {
 }
 
 int main() {
-    RUN_TEST(testConstructor);
-    RUN_TEST(testGroupArrive);
-    RUN_TEST(testGroupLeave);
+    RUN_TEST(testMountainConstructor);
+    RUN_TEST(testMountainGroupArrive);
+    RUN_TEST(testMountainGroupLeave);
 }
