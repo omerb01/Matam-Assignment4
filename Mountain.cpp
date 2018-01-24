@@ -78,7 +78,7 @@ namespace mtm {
         if (groups.size() != 0) {
             GroupPointer maximum = *(groups.begin());
             for (size_t i = 0; i < groups.size(); i++) {
-                if (groups[i] > maximum &&
+                if (*groups[i] > *maximum &&
                     (*(groups[i])).getName() != group_name)
                     maximum = groups[i];
             }
