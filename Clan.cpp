@@ -89,6 +89,7 @@ namespace mtm {
             ChangeClan(other, new_name);
         } else{
             ChangeClan(*this, new_name);
+            ChangeClan(other, new_name);
         }
         GroupPointer temp= nullptr;
         groups.unite(other.groups);
