@@ -208,7 +208,7 @@ bool testUnite() {
     ASSERT_TRUE(group1.unite(group2, 25));
     Group group3("A", "Alpha", 1, 2, 3, 4, 71);
     Group group4("A", "Alpha", 1, 2, 3, 4, 71);
-    ASSERT_FALSE(group3.unite(group4, 10));
+    ASSERT_TRUE(group3.unite(group4, 10));
     Group group5("B", "Alpha", 1, 2, 3, 4, 69);
     Group group6("A", "Alpha", 1, 2, 3, 4, 71);
     ASSERT_FALSE(group5.unite(group6, 12));
@@ -238,7 +238,7 @@ bool testFight() {
     ASSERT_NO_EXCEPTION(group1.fight(group2));
     ASSERT_EXCEPTION(group2.fight(group1), GroupCantFightEmptyGroup);
     Group group3("A", "Alpha", 5, 5, 5, 5, 5);
-    ASSERT_EXCEPTION(group3.fight(group2), GroupCantFightWithItself);
+    ASSERT_EXCEPTION(group3.fight(group3), GroupCantFightWithItself);
     Group group5("A", "Alpha", 5, 5, 6, 6, 12);
     Group group6("Z", "Getta", 10, 15, 3, 22, 10);
     ASSERT_NO_EXCEPTION(group5.fight(group6));
