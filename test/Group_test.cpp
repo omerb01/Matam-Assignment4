@@ -90,41 +90,33 @@ bool testChangeClan() {
     group1.changeClan("");
     ASSERT_TRUE(group1.getClan().empty());
     // morale should be 70
-    cout << group1 <<endl;
 
     group1.changeClan("aaa");
     ASSERT_TRUE(group1.getClan() == "aaa");
     // morale should be 77
-    cout << group1 <<endl;
 
     group1.changeClan("");
     ASSERT_TRUE(group1.getClan().empty());
     // morale should be 69
-    cout << group1 <<endl;
-
     Group group2("bbb", "", 1, 2, 3, 3, 95);
     group2.changeClan("clan");
     ASSERT_TRUE(group2.getClan() == "clan");
     // morale should be 100
-    cout << group2 <<endl;
 
     Group group3("ccc", "clan", 1, 2, 3, 3, 0);
     group3.changeClan("");
     ASSERT_TRUE(group3.getClan().empty());
     // morale should be 0
-    cout << group3 <<endl;
 
     Group group4("ddd", "clan", 1, 2, 3, 3, 1);
     group4.changeClan("");
     ASSERT_TRUE(group4.getClan().empty());
     // morale should be 0
-    cout << group4 <<endl;
 
     Group group5("eee", "clan", 1, 2, 3, 3, 50);
     group5.changeClan("clan");
     ASSERT_TRUE(group5.getClan() == "clan");
     // morale should be 50
-    cout << group5 <<endl;
 
     return true;
 }
@@ -266,7 +258,6 @@ bool testPrint(){
     Group group1("a", "Alpha", 10, 10, 8, 7,77);
     Group group2("b", "Alpha", 10, 10, 8, 2, 77);
     ASSERT_NO_EXCEPTION(group1.unite(group2,20));
-    ASSERT_NO_EXCEPTION(cout << group1 <<endl);
     ASSERT_NO_EXCEPTION(os << group1);
     ASSERT_TRUE(VerifyOutput(os, "Group's name: a\n"
             "Group's clan: Alpha\n"
