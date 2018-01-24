@@ -151,8 +151,19 @@ void World::makeReachable(const string& from, const string& to){
         if((area_pair.first) == from){
             (*area_pair.second).addReachableArea(to);
         }
-        if((area_pair.first) == to){
+/*        if((area_pair.first) == to){
             (*area_pair.second).addReachableArea(from);
+        }*/
+    }
+}
+
+static void getGroupCurrentArea(const string &group_name, AreaPtr &group_current_area,
+                           map<string, AreaPtr> area_map) {
+    for (const auto &area_pair: area_map) {
+        auto it = area_pair.second->getGroupsNames().find(group_name);
+        if (it != area_pair.second->getGroupsNames().end()) {
+            group_current_area = area_pair.second;
+            break;
         }
     }
 }
@@ -173,13 +184,7 @@ void World::moveGroup(const string& group_name, const string& destination){
     if(area_map.find(destination) == area_map.end()){
         throw WorldAreaNotFound();
     }
-    for (const auto &area_pair: area_map){
-        auto it = area_pair.second->getGroupsNames().find(group_name);
-        if(it != area_pair.second->getGroupsNames().end()){
-            group_current_area = area_pair.second;
-            break;
-        }
-    }
+    getGroupCurrentArea(group_name, group_current_area, area_map);
     for (const auto &area_pair: area_map){
         auto it = area_pair.second->getGroupsNames().find(group_name);
         if(it == area_pair.second->getGroupsNames().end() && area_pair.first == destination){
