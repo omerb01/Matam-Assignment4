@@ -25,6 +25,13 @@ namespace mtm {
         }
     }
 
+    static bool isGroupInArea(const string &group_name, std::vector<GroupPointer> groups){
+        for(const auto &group: groups){
+            if(group->getName()==group_name) return true;
+        }
+        return false;
+    }
+
     void Mountain::groupArrive(const string &group_name, const string &clan,
                                map<string, Clan> &clan_map) {
         auto it = clan_map.find(clan);
@@ -38,7 +45,7 @@ namespace mtm {
             current_dominating_group = getDomintaingGroupObject(clan_map);
         } else {
             if (arriving_group_p->getName() ==
-                current_dominating_group->getName()) {
+                current_dominating_group->getName() || isGroupInArea(group_name,groups)) {
                 throw AreaGroupAlreadyIn();
             }
             if (*arriving_group_p > *current_dominating_group &&
