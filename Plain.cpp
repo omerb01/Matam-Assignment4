@@ -15,7 +15,7 @@ static vector<GroupPointer>::iterator getStrongestGroup
     auto strongest_group = groups.begin();
 
     for (auto i = groups.begin(); i != groups.end(); i++) {
-        if (*i > *strongest_group) strongest_group = i;
+        if (*(*i) > *(*strongest_group)) strongest_group = i;
     }
 
     return strongest_group;
