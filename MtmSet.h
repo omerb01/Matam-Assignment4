@@ -92,7 +92,7 @@ namespace mtm {
              * an element in the set (end())
              */
             const Type *operator->() const {
-                return const_iterator(*this)->element;
+                return const_iterator(*this).operator->();
             }
 
             /**
