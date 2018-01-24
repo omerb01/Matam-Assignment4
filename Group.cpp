@@ -6,6 +6,7 @@
 #include "exceptions.h"
 #include <cmath>
 
+//TODO: go over exceptions priority
 
 namespace mtm{
 
@@ -170,7 +171,7 @@ void Group::uniteClan(Group &destination, const std::string& new_name){
 
 bool Group::unite(Group &other, int max_amount) {
     int total_people = children + adults + other.children + other.adults;
-    if (this->name != other.name && this->clan == other.clan &&
+    if (this != &other && this->clan == other.clan &&
         total_people <= max_amount &&
         other.morale >= 70 && morale >= 70) {
         if (*this >= other) {
@@ -185,8 +186,8 @@ bool Group::unite(Group &other, int max_amount) {
 }
 
 Group Group::divide(const std::string &name) {
-    if (this->adults <= 1 && this->children <= 1) throw GroupCantDivide();
     if (name.empty() == true) throw GroupInvalidArgs();
+    if (this->adults <= 1 && this->children <= 1) throw GroupCantDivide();
     int new_children = int(floor(children / 2.0));
     int new_adults = int(floor(adults / 2.0));
     int new_tools = int(floor(tools / 2.0));
@@ -267,7 +268,7 @@ void Group::makeTrade(Group &group1, Group &group2, int average_trade) {
 }
 
 bool Group::trade(Group &other) {
-    if (other.name == name && other.clan == clan) {
+    if (this == &other) {
         throw GroupCantTradeWithItself();
     }
     if ((food == tools || other.tools == other.food) ||
