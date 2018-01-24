@@ -20,9 +20,12 @@ void World::addClan(const string &clan_name) {
     if (clan_name.empty()) throw WorldInvalidArgument();
 
     auto iterator = clan_map.find(clan_name);
-    if (iterator != clan_map.end()) throw WorldClanNameIsTaken();
+    if (iterator != clan_map.end() || used_clan_names.contains(clan_name)) {
+        throw WorldClanNameIsTaken();
+    }
 
     clan_map.insert(pair<string, Clan>(clan_name, Clan(clan_name)));
+    used_clan_names.insert(clan_name);
 }
 
 void World::addArea(const string &area_name, AreaType type) {
@@ -108,8 +111,8 @@ void World::uniteClans(const string &clan1_name, const string &clan2_name,
     if(new_name.empty()) throw WorldInvalidArgument();
 
     auto iterator = clan_map.find(new_name);
-    if (iterator != clan_map.end() && new_name != clan1_name &&
-            new_name != clan2_name) {
+    if ((iterator != clan_map.end() || used_clan_names.contains(new_name)) &&
+            new_name != clan1_name && new_name != clan2_name) {
         throw WorldClanNameIsTaken();
     }
 
@@ -126,6 +129,8 @@ void World::uniteClans(const string &clan1_name, const string &clan2_name,
     Clan clan1 = clan1_it->second;
     clan_map.erase(clan1_it);
     clan_map.insert(pair<string, Clan>(new_name, clan1));
+
+    used_clan_names.insert(new_name);
 }
 
 void World::makeFriends(const string &clan1_name, const string &clan2_name) {
