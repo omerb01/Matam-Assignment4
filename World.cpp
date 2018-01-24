@@ -140,7 +140,7 @@ void World::makeFriends(const string &clan1_name, const string &clan2_name) {
 
 void World::makeReachable(const string& from, const string& to){
     if(area_map.find(from) == area_map.end() || area_map.find(to) == area_map.end()){
-        throw WorldClanNotFound();
+        throw WorldAreaNotFound();
     }
     for (const auto &area_pair: area_map){
         if((area_pair.first) == from){
