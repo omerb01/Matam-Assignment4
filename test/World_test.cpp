@@ -16,8 +16,13 @@ bool testAddClan() {
     ASSERT_EXCEPTION(world.addClan("CLAN"), WorldClanNameIsTaken);
     ASSERT_NO_EXCEPTION(world.addClan("ANOTHER CLAN"));
 
-    world.printClan(cout, "CLAN");
-    world.printClan(cout, "ANOTHER CLAN");
+    ostringstream os;
+    world.printClan(os, "CLAN");
+    ASSERT_TRUE(VerifyOutput(os, "Clan's name: CLAN\n"
+            "Clan's groups:\n"));
+    world.printClan(os, "ANOTHER CLAN");
+    ASSERT_TRUE(VerifyOutput(os, "Clan's name: ANOTHER CLAN\n"
+            "Clan's groups:\n"));
 
     return true;
 }
@@ -59,8 +64,20 @@ bool testAddGroup() {
     ASSERT_EXCEPTION(world.addGroup("GROUP1", "CLAN", 0, 1, "PLAIN1"),
                      WorldAreaNotFound);
 
-    world.printClan(cout, "CLAN");
-    world.printGroup(cout, "GROUP");
+    ostringstream os;
+    world.printClan(os, "CLAN");
+    ASSERT_TRUE(VerifyOutput(os, "Clan's name: CLAN\n"
+            "Clan's groups:\n"
+            "GROUP\n"));
+    world.printGroup(os, "GROUP");
+    ASSERT_TRUE(VerifyOutput(os, "Group's name: GROUP\n"
+            "Group's clan: CLAN\n"
+            "Group's children: 0\n"
+            "Group's adults: 1\n"
+            "Group's tools: 4\n"
+            "Group's food: 3\n"
+            "Group's morale: 77\n"
+            "Group's current area: PLAIN\n"));
 
     return true;
 }
@@ -94,7 +111,12 @@ bool testUniteClans() {
 
     ASSERT_NO_EXCEPTION(world.uniteClans("CLAN1", "CLAN2", "TEAM_NAME"));
 
-    world.printClan(cout, "TEAM_NAME");
+    ostringstream os;
+    world.printClan(os, "TEAM_NAME");
+    ASSERT_TRUE(VerifyOutput(os, "Clan's name: TEAM_NAME\n"
+            "Clan's groups:\n"
+            "GROUP2\n"
+            "GROUP1\n"));
 
     return true;
 }
