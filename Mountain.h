@@ -21,7 +21,6 @@ namespace mtm {
 
         ~Mountain();
 
-        //TODO: make sure it's fine:
         Mountain(const Mountain &) = delete;
 
         Mountain &operator=(const Mountain &) = delete;

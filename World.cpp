@@ -151,9 +151,6 @@ void World::makeReachable(const string& from, const string& to){
         if((area_pair.first) == from){
             (*area_pair.second).addReachableArea(to);
         }
-/*        if((area_pair.first) == to){
-            (*area_pair.second).addReachableArea(from);
-        }*/
     }
 }
 

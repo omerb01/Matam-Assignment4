@@ -6,8 +6,6 @@
 #include "exceptions.h"
 #include <cmath>
 
-//TODO: go over exceptions priority
-
 namespace mtm{
 
 Group::Group(const std::string &name, const std::string &clan, int children,
@@ -102,7 +100,6 @@ bool Group::operator==(const Group &rhs) const {
     int rhs_power, this_power;
     rhs_power = calcPower(rhs);
     this_power = calcPower(*this);
-    //TODO: ask a tutorial
     if ((rhs_power == this_power) && (rhs.name == name)) {
         return true;
     } else {

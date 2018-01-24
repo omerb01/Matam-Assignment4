@@ -14,9 +14,8 @@ namespace mtm {
 
     Mountain::~Mountain() = default;
 
-    void Mountain::groupArrive(const string &group_name, const string &clan,
-                               map<string, Clan> &clan_map) {
-        //TODO: fix function length
+    static void isAreaLegit(const string &group_name, const string &clan,
+                            map<string, Clan> &clan_map) {
         auto it = clan_map.find(clan);
         if (it == clan_map.end()) {
             throw AreaClanNotFoundInMap();
@@ -24,24 +23,32 @@ namespace mtm {
         if (!((it->second).doesContain(group_name))) {
             throw AreaGroupNotInClan();
         }
-        //Group arriving = *(it->second.getGroup(group_name));
-        GroupPointer current_dominating_group = getDomintaingGroupObject(clan_map);
+    }
+
+    void Mountain::groupArrive(const string &group_name, const string &clan,
+                               map<string, Clan> &clan_map) {
+        auto it = clan_map.find(clan);
+        isAreaLegit(group_name,clan, clan_map);
+        GroupPointer current_dominating_group = getDomintaingGroupObject(
+                clan_map);
         GroupPointer arriving_group_p = (it->second.getGroup(group_name));
         if (dominating_group.empty()) {
             dominating_group = group_name;
             groups.push_back(arriving_group_p);
             current_dominating_group = getDomintaingGroupObject(clan_map);
         } else {
-
-            if (arriving_group_p->getName() == current_dominating_group->getName()) {
+            if (arriving_group_p->getName() ==
+                current_dominating_group->getName()) {
                 throw AreaGroupAlreadyIn();
             }
-            if (*arriving_group_p > *current_dominating_group && arriving_group_p->getClan() ==
-                                                                 current_dominating_group->getClan()) {
+            if (*arriving_group_p > *current_dominating_group &&
+                arriving_group_p->getClan() ==
+                current_dominating_group->getClan()) {
                 dominating_group = arriving_group_p->getName();
             } else if (arriving_group_p->getClan() !=
                        current_dominating_group->getClan()) {
-                FIGHT_RESULT result = arriving_group_p->fight(*current_dominating_group);
+                FIGHT_RESULT result = arriving_group_p->fight(
+                        *current_dominating_group);
                 if (result == WON) {
                     dominating_group = arriving_group_p->getName();
                 }
@@ -50,10 +57,9 @@ namespace mtm {
         }
     }
 
-    /*Group*/GroupPointer Mountain::getDomintaingGroupObject(map<string, Clan> &clan_map) {
-
-        //Group current_dominating_group("dummy", 1, 1);
-        GroupPointer current_dominating_group=nullptr;
+    GroupPointer
+    Mountain::getDomintaingGroupObject(map<string, Clan> &clan_map) {
+        GroupPointer current_dominating_group = nullptr;
         for (const auto &clan_pair: clan_map) {
 
             if ((clan_pair.second).doesContain(dominating_group)) {
@@ -61,14 +67,15 @@ namespace mtm {
                         dominating_group));
             }
         }
-        if(current_dominating_group != nullptr) {
+        if (current_dominating_group != nullptr) {
             dominating_clan = current_dominating_group->getClan();
         }
         return current_dominating_group;
     }
 
-    const std::string Mountain::getMaximumGroupMount(const std::string &group_name) {
-        if(groups.size() != 0) {
+    const std::string
+    Mountain::getMaximumGroupMount(const std::string &group_name) {
+        if (groups.size() != 0) {
             GroupPointer maximum = *(groups.begin());
             for (size_t i = 0; i < groups.size(); i++) {
                 if (groups[i] > maximum &&
@@ -76,13 +83,14 @@ namespace mtm {
                     maximum = groups[i];
             }
             return maximum->getName();
-        }else{
+        } else {
             return "";
         }
     }
 
-    const std::string Mountain::getMaximumGroupClan(const std::string &group_name) {
-        if(groups.size()!=0) {
+    const std::string
+    Mountain::getMaximumGroupClan(const std::string &group_name) {
+        if (groups.size() != 0) {
             GroupPointer maximum = *(groups.begin());
             for (size_t i = 0; i < groups.size(); i++) {
                 if ((*(groups[i])).getName() == dominating_clan &&
@@ -90,22 +98,18 @@ namespace mtm {
                     maximum = *maximum > (*(groups[i])) ? maximum : groups[i];
                 }
             }
-            if((*maximum).getClan() == dominating_clan) {
+            if ((*maximum).getClan() == dominating_clan) {
                 return maximum->getName();
-            }else{
+            } else {
                 return "";
             }
-        }
-        else{
+        } else {
             return "";
         }
-
-
     }
 
-
     void Mountain::groupLeave(const std::string &group_name) {
-        int flag=0;
+        int flag = 0;
         if (group_name.empty()) {
             throw AreaGroupNotFound();
         }
@@ -116,21 +120,23 @@ namespace mtm {
                 break;
             }
         }
-        if(flag==0){
+        if (flag == 0) {
             throw AreaGroupNotFound();
         }
         if (dominating_group == group_name) {
-            std::string dominating_group_from_clan = getMaximumGroupClan(group_name);
-            std::string dominating_group_overall = getMaximumGroupMount(group_name);
+            std::string dominating_group_from_clan = getMaximumGroupClan(
+                    group_name);
+            std::string dominating_group_overall = getMaximumGroupMount(
+                    group_name);
             if (!(dominating_group_from_clan.empty())) {
                 dominating_group = dominating_group_from_clan;
             } else if (!(dominating_group_overall.empty())) {
                 dominating_group = dominating_group_overall;
             } else {
                 dominating_group = "";
-                dominating_clan ="";
+                dominating_clan = "";
             }
-        }else{
+        } else {
             return;
         }
     }
