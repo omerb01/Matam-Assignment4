@@ -105,7 +105,7 @@ namespace mtm {
 
 
     void Mountain::groupLeave(const std::string &group_name) {
-        if (dominating_group.empty()) {
+        if (group_name.empty()) {
             throw AreaGroupNotFound();
         }
         for (auto i = groups.begin(); i != groups.end(); i++) {
@@ -125,9 +125,9 @@ namespace mtm {
                 dominating_group = "";
                 dominating_clan ="";
             }
+        }else{
+            throw AreaGroupNotFound();
         }
-
-        return;
     }
 
 
