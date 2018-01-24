@@ -55,8 +55,6 @@ bool testPlain(){
     ASSERT_EXCEPTION(winterfell->groupLeave("Targeryan_2"),AreaGroupNotFound);
     ASSERT_NO_EXCEPTION(winterfell->groupLeave("Stark"));
     ASSERT_NO_EXCEPTION(winterfell->groupLeave("Lannister"));
-    ASSERT_NO_EXCEPTION(winterfell->groupLeave("Baratheon"));
-    ASSERT_FALSE(winterfell->getGroupsNames().contains("Baratheon"));
     ASSERT_FALSE(winterfell->getGroupsNames().contains("Lannister"));
     ASSERT_FALSE(winterfell->getGroupsNames().contains("Stark"));
     ASSERT_EXCEPTION(winterfell->groupLeave(""),AreaGroupNotFound);
@@ -70,6 +68,14 @@ bool testPlain(){
             "Stark\n"
             "Baratheon\n"
             "Targeryan_3\n"));
+    ASSERT_EXCEPTION(winterfell->groupArrive("","",clan_map)
+            ,AreaClanNotFoundInMap);
+    ASSERT_EXCEPTION(winterfell->groupArrive("NotFound","NotFound",clan_map)
+            ,AreaClanNotFoundInMap);
+    ASSERT_EXCEPTION(winterfell->groupArrive("NotFound","GOT",clan_map)
+            ,AreaGroupNotInClan);
+    ASSERT_EXCEPTION(winterfell->groupArrive("Baratheon","GOT",clan_map)
+            ,AreaGroupAlreadyIn);
     return true;
 }
 
@@ -115,6 +121,14 @@ bool testMountain() {
     ASSERT_TRUE(m1->getGroupsNames().contains("Justice League_3"));
     ASSERT_EXCEPTION(m1->groupLeave(""),AreaGroupNotFound);
     ASSERT_EXCEPTION(m1->groupLeave("Deadpool"),AreaGroupNotFound);
+    ASSERT_EXCEPTION(m1->groupArrive("","",clan_map)
+            ,AreaClanNotFoundInMap);
+    ASSERT_EXCEPTION(m1->groupArrive("NotFound","NotFound",clan_map)
+            ,AreaClanNotFoundInMap);
+    ASSERT_EXCEPTION(m1->groupArrive("NotFound","GOT",clan_map)
+            ,AreaGroupNotInClan);
+    ASSERT_EXCEPTION(m1->groupArrive("Weak","Marvel",clan_map)
+            ,AreaGroupAlreadyIn);
     return true;
 }
 
@@ -135,12 +149,12 @@ bool testRiver () {
     ostringstream os;
     ASSERT_NO_EXCEPTION(os << *(clan_map.at("GOT").getGroup("Lannister")));
     ASSERT_TRUE(VerifyOutput(os, "Group's name: Lannister\n"
-                        "Group's clan: GOT\n"
-                        "Group's children: 5\n"
-                        "Group's adults: 7\n"
-                        "Group's tools: 94\n"
-                        "Group's food: 103\n"
-                        "Group's morale: 55\n"));
+            "Group's clan: GOT\n"
+            "Group's children: 5\n"
+            "Group's adults: 7\n"
+            "Group's tools: 94\n"
+            "Group's food: 103\n"
+            "Group's morale: 55\n"));
     ASSERT_NO_EXCEPTION(r1->groupArrive("Justice League_4", "DC", clan_map));
     ASSERT_NO_EXCEPTION(os << *(clan_map.at("GOT").getGroup("Lannister")));
     ASSERT_TRUE(VerifyOutput(os, "Group's name: Lannister\n"
@@ -164,6 +178,14 @@ bool testRiver () {
     ASSERT_NO_EXCEPTION(r1->groupLeave("Traders"));
     ASSERT_EXCEPTION(r1->groupLeave("Traders"),AreaGroupNotFound);
     ASSERT_NO_EXCEPTION(r1->groupArrive("Traders", "Marvel", clan_map));
+    ASSERT_EXCEPTION(r1->groupArrive("","",clan_map)
+            ,AreaClanNotFoundInMap);
+    ASSERT_EXCEPTION(r1->groupArrive("NotFound","NotFound",clan_map)
+            ,AreaClanNotFoundInMap);
+    ASSERT_EXCEPTION(r1->groupArrive("NotFound","GOT",clan_map)
+            ,AreaGroupNotInClan);
+    ASSERT_EXCEPTION(r1->groupArrive("Traders","Marvel",clan_map)
+            ,AreaGroupAlreadyIn);
     return true ;
 }
 

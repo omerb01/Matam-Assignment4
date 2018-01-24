@@ -105,14 +105,19 @@ namespace mtm {
 
 
     void Mountain::groupLeave(const std::string &group_name) {
+        int flag=0;
         if (group_name.empty()) {
             throw AreaGroupNotFound();
         }
         for (auto i = groups.begin(); i != groups.end(); i++) {
             if ((*i)->getName() == group_name) {
                 groups.erase(i);
+                flag++;
                 break;
             }
+        }
+        if(flag==0){
+            throw AreaGroupNotFound();
         }
         if (dominating_group == group_name) {
             std::string dominating_group_from_clan = getMaximumGroupClan(group_name);
@@ -126,9 +131,7 @@ namespace mtm {
                 dominating_clan ="";
             }
         }else{
-            throw AreaGroupNotFound();
+            return;
         }
     }
-
-
 }
