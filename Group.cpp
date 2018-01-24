@@ -208,7 +208,13 @@ void Group::postFightUpdate(Group &lost, Group &won) {
     lost.food -= lost_food;
     lost.tools -= int(ceil((1.0 / 2.0) * (lost.tools)));
     lost.morale -= int(ceil((0.2) * (lost.morale)));
-
+    if(lost.adults == 0 && lost.children==0){
+        lost.name = "";
+        lost.food=0;
+        lost.tools=0;
+        lost.morale=0;
+        lost.clan="";
+    }
     won.adults -= int(floor((1.0 / 4.0) * (won.adults)));
     won.food += int(floor((1.0 / 2.0) * lost_food));
     won.tools -= int(floor((1.0 / 4.0) * (won.tools)));
